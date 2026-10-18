@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CHAN'S BIO</title>
+<meta name="description" content="chan｜資訊安全與網路。亞洲大學行動商務與多媒體應用學系畢業，現任職臺中市政府。ISC2 CC、CEH、CEH Practical、ISO/IEC 27001:2022。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0c0c0c; --bg2: #161616; --fg: #f0ece4; --fg2: #b5afa6;
+  --acc: #e06a2e; --acc2: #f39050; --border: rgba(240,236,228,0.24);
+  --font-display: 'Syne', 'Noto Sans TC', sans-serif;
+  --font-mono: 'Space Mono', 'Noto Sans TC', 'Microsoft JhengHei', monospace;
+  --font-body: 'Noto Sans TC', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+}
+html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.8; min-height: 100vh; overflow-x: hidden; }
+body::before { content: ''; position: fixed; inset: 0; z-index: 999; pointer-events: none; opacity: 0.025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 150px; }
+a { color: var(--acc2); }
+code { font-family: var(--font-mono); font-size: 0.92em; background: var(--bg2); border: 1px solid var(--border); padding: 0 6px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 60px; border-bottom: 1px solid var(--border); background: rgba(12,12,12,0.88); backdrop-filter: blur(12px); }
+.nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 16px; letter-spacing: 0.12em; color: var(--fg); text-decoration: none; }
+.nav-logo span { color: var(--acc); }
+.nav-links { display: flex; gap: 32px; }
+.nav-link { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg2); text-decoration: none; transition: color 0.2s; position: relative; padding-bottom: 2px; }
+.nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--acc); transition: width 0.25s; }
+.nav-link:hover { color: var(--fg); }
+.nav-link:hover::after { width: 100%; }
+
+/* HERO */
+.hero { position: relative; min-height: calc(100vh - 60px); margin-top: 60px; border-bottom: 1px solid var(--border); display: flex; align-items: center; overflow: hidden; }
+.hero-globe-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-end; pointer-events: none; z-index: 0; padding-right: 5%; }
+#globe-canvas { opacity: 0.85; max-width: 100%; }
+.hero-text { position: relative; z-index: 1; padding: 80px 48px; max-width: 640px; }
+.hero-label { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.18em; color: var(--acc); text-transform: uppercase; margin-bottom: 24px; }
+.hero-title { font-family: var(--font-display); font-size: clamp(52px, 7vw, 110px); font-weight: 800; line-height: 1; letter-spacing: -0.02em; margin-bottom: 24px; }
+.hero-title .line2 { color: var(--acc); display: block; }
+.hero-sub { font-size: 17px; color: var(--fg2); max-width: 460px; line-height: 1.9; margin-bottom: 40px; }
+.hero-cta { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--acc); color: var(--acc); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; padding: 12px 24px; text-decoration: none; transition: background 0.2s, color 0.2s; }
+.hero-cta:hover { background: var(--acc); color: var(--bg); }
+
+/* SECTIONS */
+.section { padding: 80px 48px; border-bottom: 1px solid var(--border); }
+.section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px; flex-wrap: wrap; }
+.section-title { font-family: var(--font-display); font-size: 32px; font-weight: 700; }
+.section-count { font-family: var(--font-mono); font-size: 13px; color: var(--acc); letter-spacing: 0.08em; }
+
+/* ABOUT */
+.about-top { display: grid; grid-template-columns: 1fr 280px; gap: 60px; align-items: start; }
+.about-name { font-family: var(--font-display); font-size: clamp(48px, 5vw, 80px); font-weight: 800; letter-spacing: -0.02em; line-height: 1; margin-bottom: 20px; }
+.about-name span { color: var(--acc); }
+.about-bio { font-size: 17px; color: var(--fg2); line-height: 1.95; max-width: 620px; }
+.about-photo { aspect-ratio: 1; background: var(--bg2); border: 1px solid var(--border); position: relative; overflow: hidden; }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0.2); }
+.photo-frame-line { position: absolute; inset: 12px; border: 1px solid var(--border); pointer-events: none; }
+
+/* SKILLS */
+.skills-label { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg2); margin: 48px 0 16px; }
+.skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.skill-tag { font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--border); background: none; color: var(--fg); padding: 10px 18px; cursor: pointer; transition: all 0.2s; }
+.skill-tag:hover, .skill-tag.active { border-color: var(--acc); background: var(--acc); color: var(--bg); }
+.skill-detail { margin-top: 24px; padding: 24px; border: 1px solid var(--acc); background: var(--bg2); display: none; animation: fadeIn 0.25s ease; }
+.skill-detail.show { display: block; }
+.skill-detail-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--acc); margin-bottom: 8px; }
+.skill-detail-desc { font-size: 16px; color: var(--fg2); line-height: 1.9; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 1px; background: var(--border); }
+.timeline-item { position: relative; padding-bottom: 40px; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-dot { position: absolute; left: -29px; top: 6px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--acc); background: var(--bg); transition: background 0.2s; }
+.timeline-item:hover .timeline-dot { background: var(--acc); }
+.timeline-date { font-family: var(--font-mono); font-size: 13px; color: var(--acc); letter-spacing: 0.08em; margin-bottom: 4px; }
+.timeline-role { font-family: var(--font-display); font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.timeline-company { font-size: 16px; color: var(--fg); margin-bottom: 8px; font-weight: 500; }
+.timeline-desc { font-size: 16px; color: var(--fg2); line-height: 1.9; max-width: 720px; }
+.timeline-desc ul { padding-left: 1.2em; margin-top: 6px; }
+.timeline-desc strong { color: var(--fg); font-weight: 700; }
+
+/* CARD GRIDS */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.cert { border: 1px solid var(--border); padding: 20px; transition: border-color 0.2s, background 0.2s; }
+.cert:hover { border-color: var(--acc); background: var(--bg2); }
+.cert-name { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: var(--acc2); margin-bottom: 4px; }
+.cert-desc { font-size: 15px; color: var(--fg2); }
+
+.project-list { display: grid; gap: 20px; }
+.project { border: 1px solid var(--border); padding: 32px; position: relative; overflow: hidden; transition: border-color 0.2s, background 0.2s; }
+.project::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--acc); transition: height 0.3s; }
+.project:hover { border-color: var(--acc); background: var(--bg2); }
+.project:hover::before { height: 100%; }
+.project-meta { font-size: 14px; color: var(--acc2); letter-spacing: 0.04em; margin-bottom: 10px; }
+.project-title { font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 14px; line-height: 1.35; }
+.project-desc { font-size: 16px; color: var(--fg2); line-height: 1.9; }
+.project-desc ul { padding-left: 1.2em; margin-top: 10px; }
+.project-desc li { margin: 4px 0; }
+.project-desc strong { color: var(--fg); font-weight: 700; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.project-tag { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--acc2); border: 1px solid rgba(224,106,46,0.55); padding: 3px 10px; }
+
+/* CONTACT */
+.contact { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.contact-title { font-family: var(--font-display); font-size: clamp(40px, 5vw, 72px); font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+.contact-title span { color: var(--acc); }
+.contact-links { display: flex; flex-direction: column; gap: 16px; }
+.contact-link { font-family: var(--font-mono); font-size: 17px; color: var(--acc2); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.2s; }
+.contact-link:hover { color: var(--fg); }
+
+/* THEME TOGGLE */
+.theme-btn { position: fixed; top: 68px; right: 24px; z-index: 99; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg2); color: var(--fg2); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.25s, color 0.2s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+.theme-btn:hover { border-color: var(--acc); color: var(--fg); transform: scale(1.12); }
+.theme-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.theme-btn .icon-sun { display: block; }
+.theme-btn .icon-moon { display: none; }
+body.light .theme-btn .icon-sun { display: none; }
+body.light .theme-btn .icon-moon { display: block; }
+
+/* LIGHT THEME */
+body.light { --bg: #f0ece4; --bg2: #e4dfd6; --fg: #120f0d; --fg2: #3f3a35; --border: rgba(20,15,10,0.26); --acc: #b5501d; --acc2: #9c4216; }
+body.light nav { background: rgba(240,236,228,0.94); }
+body.light #globe-canvas { opacity: 0.55; }
+body.light .hero { background: linear-gradient(135deg, var(--bg) 60%, #e8d8c8 100%); }
+
+/* FOOTER */
+footer { padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-family: var(--font-mono); font-size: 13px; color: var(--fg2); letter-spacing: 0.06em; }
+footer span { color: var(--acc); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 0 16px; }
+  .nav-links { gap: 14px; }
+  .nav-link { font-size: 12px; letter-spacing: 0.04em; }
+  .hero-text { padding: 56px 16px; }
+  .hero-globe-bg { opacity: 0.35; justify-content: center; padding-right: 0; }
+  #globe-canvas { width: 300px !important; height: 300px !important; }
+  .section { padding: 52px 16px; }
+  .about-top { grid-template-columns: 1fr; gap: 32px; }
+  .about-photo { max-width: 200px; }
+  .project { padding: 20px; }
+  .contact { grid-template-columns: 1fr; }
+  footer { padding: 20px 16px; }
+  .theme-btn { top: auto; bottom: 20px; right: 16px; }
+}
+@media (max-width: 480px) {
+  .nav-links .nav-link.optional { display: none; }
+  .hero-title { font-size: clamp(40px, 12vw, 68px); }
+  .card-grid { grid-template-columns: 1fr; }
+}
+
+/* PRINT：給書審資料用 */
+@media print {
+  body, body.light { --bg: #fff; --bg2: #fff; --fg: #000; --fg2: #333; --border: #bbb; --acc: #b5501d; --acc2: #b5501d; }
+  body::before, nav, .theme-btn, .hero-globe-bg, .hero-cta, .skill-detail { display: none !important; }
+  .hero { min-height: 0; margin-top: 0; }
+  .hero-text { padding: 0 0 24px; }
+  .section { padding: 24px 0; }
+  .project, .cert, .timeline-item { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#top">CHAN<span>'S</span> BIO</a>
+  <div class="nav-links">
+    <a class="nav-link" href="#about">關於</a>
+    <a class="nav-link optional" href="#experience">經歷</a>
+    <a class="nav-link" href="#projects">專案</a>
+    <a class="nav-link optional" href="#certs">證照</a>
+    <a class="nav-link" href="#contact">聯絡</a>
+  </div>
+</nav>
+
+<button class="theme-btn" id="theme-btn" title="切換主題" aria-label="切換深淺色主題">
+  <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" fill="currentColor" stroke="none"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="top">
+  <div class="hero-globe-bg">
+    <canvas id="globe-canvas" width="560" height="560"></canvas>
+  </div>
+  <div class="hero-text">
+    <div class="hero-label">// Information Security &amp; Networking</div>
+    <h1 class="hero-title">HI, I'M<br><span class="line2">CHAN.</span></h1>
+    <p class="hero-sub" id="hero-sub">對資訊安全與網路有興趣，喜歡自己動手架設、拆解與驗證系統。</p>
+    <a class="hero-cta" href="#projects">→ View projects</a>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="section" id="about">
+  <div class="about-top">
+    <div>
+      <h2 class="about-name">CHAN<span>.</span></h2>
+      <p class="about-bio">
+        亞洲大學行動商務與多媒體應用學系畢業，112 年通過地方特考四等考試，目前任職於臺中市政府。<br><br>
+        在公部門負責伺服器網路環境、異地備援與 ISMS 稽核管理的這段時間，我更清楚看見資訊安全從政策、管理到技術落地的完整樣貌，因此陸續取得 ISC2 CC、CEH、CEH Practical 與 ISO/IEC 27001:2022 等證照，也在家中自建網路環境，實際練習存取控制、加密通道與憑證管理。希望在研究所針對資訊安全與網路做更深入的研究。
+      </p>
+    </div>
+    <div class="about-photo">
+      <img id="avatar" src="https://github.com/cht90845.png" alt="chan 的大頭貼" />
+      <div class="photo-frame-line"></div>
+    </div>
+  </div>
+
+  <div class="skills-label">// 研究興趣與技能（點擊查看）</div>
+  <div class="skills-grid">
+    <button class="skill-tag" data-title="資訊安全" data-desc="關注系統與應用程式的權限隔離與最小權限設計，以及 Web 應用安全（OWASP Top 10，例如 Injection 類弱點）。滑石輸入法就是以作業系統沙盒強制保證資料不外流的實作。">資訊安全</button>
+    <button class="skill-tag" data-title="網路與網路安全" data-desc="網路架構、存取控制、加密通道（WireGuard / Tailscale）與憑證管理。在 Homelab 中實際設計零信任式的私人網路，服務不對公網開放任何連接埠。">網路</button>
+    <button class="skill-tag" data-title="資安治理" data-desc="以 ISO/IEC 27001:2022 為基礎的資訊安全管理系統（ISMS），並結合在公部門的工作經驗，思考資安政策如何實際落地。">ISMS / ISO 27001</button>
+    <button class="skill-tag" data-title="Swift / macOS" data-desc="以 Swift 與 Objective-C++ 開發 macOS 輸入法，熟悉 App Sandbox、Entitlements 與 Hardened Runtime 等平台安全機制。">Swift / macOS</button>
+    <button class="skill-tag" data-title="Docker / Homelab" data-desc="在 Synology NAS 上以 Docker 部署服務，搭配 Caddy 反向代理與 Cloudflare DNS-01 驗證自動取得 Let's Encrypt 憑證。">Docker / Homelab</button>
+    <button class="skill-tag" data-title="Unity / 3ds Max" data-desc="大學畢業專題以 Unity 製作 3D RPG「磷鉀鈷」，負責場景建置與地圖設計、敵人骨架綁定與動作，以及程式撰寫整合；具備 3ds Max 證照。">Unity / 3ds Max</button>
+  </div>
+  <div class="skill-detail" id="skill-detail">
+    <div class="skill-detail-title" id="skill-detail-title"></div>
+    <div class="skill-detail-desc" id="skill-detail-desc"></div>
+  </div>
+</section>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section class="section" id="experience">
+  <div class="section-header">
+    <h2 class="section-title">經歷與學歷</h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">112 — 現在</div>
+      <div class="timeline-role">臺中市政府</div>
+      <div class="timeline-company">資訊處理職系｜公務人員</div>
+      <div class="timeline-desc">
+        112 年地方政府特種考試四等考試資訊處理類科及格，分發至臺中市政府服務。
+        <ul>
+          <li><strong>伺服器與網路環境</strong>：負責伺服器與網路環境的設定與維運。</li>
+          <li><strong>異地備援</strong>：管理異地備援機制，確保系統與資料在異常時能夠復原。</li>
+          <li><strong>ISMS 管理</strong>：執行資訊安全管理制度的年度計畫與稽核管理。</li>
+          <li><strong>軟體合法性管控</strong>：管理軟體授權與安裝，確保使用合法版權軟體。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">— 112</div>
+      <div class="timeline-role">亞洲大學</div>
+      <div class="timeline-company">行動商務與多媒體應用學系｜學士</div>
+      <div class="timeline-desc">
+        <ul>
+          <li>擔任班級幹部、系辦工讀生與課程助教。</li>
+          <li>畢業專題：以 Unity 製作 3D RPG 遊戲「磷鉀鈷（PK Co）」。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2020 — 2022</div>
+      <div class="timeline-role">IEEE 國際研討會工作人員</div>
+      <div class="timeline-company">IRC 2020、BigMM、AIVR、IRC、BIBE 2022</div>
+      <div class="timeline-desc">協助國際研討會進行，並旁聽各領域的英文論文發表，從中確立往資訊安全發展的方向。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section class="section" id="projects">
+  <div class="section-header">
+    <h2 class="section-title">專案</h2>
+  </div>
+  <div class="project-list">
+
+    <article class="project">
+      <div class="project-meta">個人專案 ／ Fork 自 OpenVanilla 小麥注音</div>
+      <h3 class="project-title">滑石 Talc — 注重隱私的 macOS 注音輸入法</h3>
+      <div class="project-desc">
+        目標是提供接近華碩智慧輸入法的體驗：中英混打、不用按 Shift。輸入法會經手使用者打的每一個字，因此把「資料不外流」當成第一優先的設計原則。
+        <ul>
+          <li><strong>零網路、零上傳</strong>：在 App Sandbox 中執行且不申請連網權限，由作業系統強制禁止連網，可用 <code>codesign -d --entitlements</code> 驗證。</li>
+          <li><strong>強化執行環境</strong>：正式版開啟 Hardened Runtime，不帶除錯權限。</li>
+          <li><strong>資料透明</strong>：使用者資料只存在本機，以純文字一行一筆儲存，可直接檢視、編輯、清除。</li>
+          <li><strong>輕量</strong>：常駐記憶體控制在原版 1.5 倍以內，不內建大型語言模型。</li>
+          <li><strong>授權合規</strong>：處理 Apache 2.0 與 MIT 雙重授權，完整保留上游版權聲明。</li>
+        </ul>
+      </div>
+      <div class="project-tags"><span class="project-tag">Swift</span><span class="project-tag">Objective-C++</span><span class="project-tag">App Sandbox</span><span class="project-tag">Hardened Runtime</span></div>
+    </article>
+
+    <article class="project">
+      <div class="project-meta">Homelab ／ 持續進行中</div>
+      <h3 class="project-title">自建網路環境 — 零信任式私人服務</h3>
+      <div class="project-desc">
+        在家中以 Synology NAS 建立私人服務，實際練習網路架構、存取控制與憑證管理。
+        <ul>
+          <li><strong>零信任式私人網路</strong>：以 Tailscale（WireGuard）串接個人裝置，並以 ACL 明確定義裝置間可存取的範圍，服務不對公網開放任何連接埠。</li>
+          <li><strong>自架密碼管理器</strong>：在 Docker 上部署 Vaultwarden，只能透過 VPN 存取，並關閉公開註冊。</li>
+          <li><strong>反向代理與憑證自動化</strong>：以 Caddy 透過 Cloudflare DNS-01 驗證取得 Let's Encrypt 萬用憑證，API Token 權限限縮到單一網域的 DNS 編輯。</li>
+          <li><strong>攻擊面盤點</strong>：檢視 NAS 防火牆與 DNS 紀錄，下線不再維護、仍暴露在公網上的舊服務。</li>
+        </ul>
+      </div>
+      <div class="project-tags"><span class="project-tag">Tailscale</span><span class="project-tag">WireGuard</span><span class="project-tag">Docker</span><span class="project-tag">Caddy</span><span class="project-tag">Cloudflare</span></div>
+    </article>
+
+    <article class="project">
+      <div class="project-meta">大學畢業專題 ／ 4 人團隊</div>
+      <h3 class="project-title">磷鉀鈷（PK Co）— 環境議題 3D RPG 遊戲</h3>
+      <div class="project-desc">
+        以末日劇情包裝環境汙染議題：化學工廠違法排放廢水，下水道生物因汙染而變異並危害城市，玩家扮演科學家製造出的變異烏龜「磷鉀鈷」，一路找出汙染源頭。希望讓玩家在遊戲中意識到環境汙染可能造成的後果。
+        <ul>
+          <li><strong>三個關卡</strong>：「起源」破壞屋內的變異蟑螂巢穴、「困境」擊敗變異蜥蜴 BOSS 取得血清、「落幕」穿越迷宮找到汙染源頭並中和水源。</li>
+          <li><strong>我的負責</strong>：第一關的場景建置與地圖設計、敵人角色的骨架綁定與動作，以及遊戲程式的撰寫與整合。</li>
+          <li><strong>製作流程</strong>：以 3ds Max 製作人物骨架與建築模型，搭配 Mixamo 套用角色動作，再匯入 Unity 完成關卡、任務與 UI。</li>
+        </ul>
+      </div>
+      <div class="project-tags"><span class="project-tag">Unity</span><span class="project-tag">C#</span><span class="project-tag">3ds Max</span><span class="project-tag">Mixamo</span></div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══ CERTS ═══ -->
+<section class="section" id="certs">
+  <div class="section-header">
+    <h2 class="section-title">證照</h2>
+  </div>
+  <div class="card-grid">
+    <div class="cert"><div class="cert-name">ISC2 CC</div><div class="cert-desc">Certified in Cybersecurity</div></div>
+    <div class="cert"><div class="cert-name">CEH</div><div class="cert-desc">EC-Council Certified Ethical Hacker</div></div>
+    <div class="cert"><div class="cert-name">CEH Practical</div><div class="cert-desc">EC-Council 實作測驗</div></div>
+    <div class="cert"><div class="cert-name">ISO/IEC 27001:2022</div><div class="cert-desc">資訊安全管理系統</div></div>
+    <div class="cert"><div class="cert-name">3ds Max</div><div class="cert-desc">Autodesk 3D 建模</div></div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="section" id="contact">
+  <div class="contact">
+    <h2 class="contact-title">聯絡<br><span>我。</span></h2>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:hb30315@chilltc.com"><span>→</span> hb30315@chilltc.com</a>
+      <a class="contact-link" href="https://github.com/cht90845" target="_blank" rel="noopener"><span>→</span> github.com/cht90845</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div><span>CHAN</span>'S BIO — 2026</div>
+  <div>最後更新：2026.10</div>
+</footer>
+
+<script>
+// ── THEME ─────────────────────────────────────────────────────
+(function () {
+  try { if (localStorage.getItem('chan_theme') === 'light') document.body.classList.add('light'); } catch (e) {}
+})();
+document.getElementById('theme-btn').addEventListener('click', function () {
+  document.body.classList.toggle('light');
+  var isLight = document.body.classList.contains('light');
+  try { localStorage.setItem('chan_theme', isLight ? 'light' : 'dark'); } catch (e) {}
+  this.style.transform = 'scale(1.15) rotate(180deg)';
+  var btn = this;
+  setTimeout(function () { btn.style.transform = ''; }, 300);
+});
+
+// ── GITHUB PROFILE：頭像與 Bio 跟著 GitHub 個人設定更新 ─────────
+fetch('https://api.github.com/users/cht90845')
+  .then(function (r) { return r.ok ? r.json() : null; })
+  .then(function (u) {
+    if (!u) return;
+    if (u.avatar_url) document.getElementById('avatar').src = u.avatar_url;
+    if (u.bio) document.getElementById('hero-sub').textContent = u.bio;
+  })
+  .catch(function () {});
+
+// ── SKILLS ────────────────────────────────────────────────────
+(function () {
+  var detail = document.getElementById('skill-detail');
+  var titleEl = document.getElementById('skill-detail-title');
+  var descEl = document.getElementById('skill-detail-desc');
+  var active = null;
+  document.querySelectorAll('.skill-tag').forEach(function (el) {
+    el.addEventListener('click', function () {
+      document.querySelectorAll('.skill-tag').forEach(function (t) { t.classList.remove('active'); });
+      if (active === el) { detail.classList.remove('show'); active = null; return; }
+      el.classList.add('active');
+      titleEl.textContent = el.dataset.title;
+      descEl.textContent = el.dataset.desc;
+      detail.classList.add('show');
+      active = el;
+    });
+  });
+})();
+
+// ── GLOBE ──────────────────────────────────────────────────────
+(function () {
+  var canvas = document.getElementById('globe-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+  var cx = W / 2, cy = H / 2;
+  var R = 220;
+  var D = Math.PI / 180;
+  var angle = 0;
+  var borderLines = [];
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var CAPS_DEG = [
+    [139.7,35.7],[116.4,39.9],[126.9,37.6],[77.2,28.6],[100.5,13.8],
+    [103.8,1.4],[106.8,-6.2],[37.6,55.8],[30.3,59.9],[-0.1,51.5],
+    [2.3,48.9],[13.4,52.5],[12.5,41.9],[28.9,41.0],[44.4,33.3],
+    [46.7,24.7],[51.4,35.7],[31.2,30.1],[36.8,-1.3],[7.5,9.1],
+    [18.4,-33.9],[32.6,0.3],[55.3,25.3],[72.8,19.1],[-77.0,38.9],
+    [151.2,-33.9],[174.8,-36.9],[-99.1,19.4],[-74.1,4.7],[-47.9,-15.8],
+    [-58.4,-34.6],[-43.2,-22.9],[-79.4,43.7],[-123.1,49.3],
+    [144.9,-37.8],[114.1,22.5],[120.7,24.1],[24.9,60.2],[18.1,59.3]
+  ];
+  var ARCS = [
+    [0,1],[1,2],[0,3],[3,4],[4,5],
+    [7,8],[8,9],[9,10],[10,11],[11,12],
+    [13,14],[14,17],[17,18],[18,19],
+    [24,29],[29,30],[30,31],[24,9],[7,17],[0,36],[36,35],[36,24]
+  ];
+
+  function llToXYZ(lon, lat) {
+    var phi = lat * D, lam = lon * D;
+    return [Math.cos(phi) * Math.cos(lam), Math.sin(phi), Math.cos(phi) * Math.sin(lam)];
+  }
+  var nodes = CAPS_DEG.map(function (c) { return llToXYZ(c[0], c[1]); });
+
+  function rotate(x, y, z) {
+    var cos = Math.cos(angle), sin = Math.sin(angle), tilt = 0.2;
+    var rx = x * cos - z * sin, rz = x * sin + z * cos;
+    var ry = y * Math.cos(tilt) - rz * Math.sin(tilt), rz2 = y * Math.sin(tilt) + rz * Math.cos(tilt);
+    return [rx, ry, rz2];
+  }
+
+  var arcPaths = ARCS.map(function (a) {
+    var p1 = nodes[a[0]], p2 = nodes[a[1]];
+    var dot = Math.min(1, Math.max(-1, p1[0]*p2[0] + p1[1]*p2[1] + p1[2]*p2[2]));
+    var omega = Math.acos(dot);
+    var pts = [];
+    for (var t = 0; t <= 28; t++) {
+      var f = t / 28;
+      if (Math.abs(omega) < 0.001) { pts.push(p1); continue; }
+      var s = 1 / Math.sin(omega);
+      var sa = Math.sin((1 - f) * omega) * s, sb = Math.sin(f * omega) * s;
+      var nx = sa*p1[0] + sb*p2[0], ny = sa*p1[1] + sb*p2[1], nz = sa*p1[2] + sb*p2[2];
+      var l = Math.sqrt(nx*nx + ny*ny + nz*nz);
+      pts.push([nx/l, ny/l, nz/l]);
+    }
+    return pts;
+  });
+  var pulses = ARCS.map(function (_, i) { return { t: i / ARCS.length, speed: 0.013 + Math.random() * 0.009 }; });
+
+  // 國界資料：失敗時只顯示經緯線
+  (function loadBorders() {
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js';
+    s.onload = function () {
+      fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json')
+        .then(function (r) { return r.json(); })
+        .then(function (world) { borderLines = window.topojson.mesh(world, world.objects.countries).coordinates; })
+        .catch(function () {});
+    };
+    document.head.appendChild(s);
+  })();
+
+  var LAT_STEPS = 6, LNG_STEPS = 12;
+  var isVisible = true;
+
+  function seg(p1, p2, alpha, color, width) {
+    ctx.strokeStyle = 'rgba(' + color + ',' + alpha + ')';
+    ctx.lineWidth = width;
+    ctx.beginPath(); ctx.moveTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.stroke();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (!reduceMotion) angle += 0.006;
+    var isLight = document.body.classList.contains('light');
+    var gr = isLight ? '90,90,100' : '210,205,195';
+    var arcCol = isLight ? '90,90,110' : '212,98,42';
+    var nodeCol = isLight ? '90,90,120' : '240,129,58';
+    var nodeFade = isLight ? '180,180,210' : '255,230,180';
+
+    var atmo = ctx.createRadialGradient(cx, cy, R * 0.88, cx, cy, R * 1.3);
+    atmo.addColorStop(0, 'rgba(212,98,42,0)');
+    atmo.addColorStop(0.55, 'rgba(212,98,42,0.06)');
+    atmo.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = atmo;
+    ctx.beginPath(); ctx.arc(cx, cy, R * 1.3, 0, Math.PI * 2); ctx.fill();
+
+    var i, j, pts, p;
+    for (i = 1; i < LAT_STEPS; i++) {
+      var lat = -Math.PI / 2 + Math.PI * i / LAT_STEPS;
+      pts = [];
+      for (j = 0; j <= 40; j++) {
+        var lon = (j / 40) * Math.PI * 2;
+        p = rotate(Math.cos(lat) * Math.cos(lon), Math.sin(lat), Math.cos(lat) * Math.sin(lon));
+        pts.push([p[0] * R + cx, -p[1] * R + cy, p[2]]);
+      }
+      for (j = 0; j < pts.length - 1; j++) {
+        if (pts[j][2] > 0 && pts[j + 1][2] > 0) seg(pts[j], pts[j + 1], Math.max(0, ((pts[j][2] + pts[j + 1][2]) / 2) * 0.45), gr, 0.55);
+      }
+    }
+    for (i = 0; i < LNG_STEPS; i++) {
+      var lng = (i / LNG_STEPS) * Math.PI * 2;
+      pts = [];
+      for (j = 0; j <= 32; j++) {
+        var la = -Math.PI / 2 + Math.PI * j / 32;
+        p = rotate(Math.cos(la) * Math.cos(lng), Math.sin(la), Math.cos(la) * Math.sin(lng));
+        pts.push([p[0] * R + cx, -p[1] * R + cy, p[2]]);
+      }
+      for (j = 0; j < pts.length - 1; j++) {
+        if (pts[j][2] > 0 && pts[j + 1][2] > 0) seg(pts[j], pts[j + 1], Math.max(0, ((pts[j][2] + pts[j + 1][2]) / 2) * 0.3), gr, 0.45);
+      }
+    }
+
+    if (borderLines.length) {
+      var bcol = isLight ? '90,90,100' : '220,215,205';
+      ctx.strokeStyle = 'rgba(' + bcol + ',0.48)';
+      ctx.lineWidth = 0.7;
+      borderLines.forEach(function (line) {
+        if (line.length < 2) return;
+        ctx.beginPath();
+        var penDown = false;
+        line.forEach(function (ll) {
+          var r = rotate.apply(null, llToXYZ(ll[0], ll[1]));
+          if (r[2] > 0.02) {
+            if (!penDown) { ctx.moveTo(r[0] * R + cx, -r[1] * R + cy); penDown = true; }
+            else ctx.lineTo(r[0] * R + cx, -r[1] * R + cy);
+          } else { penDown = false; }
+        });
+        ctx.stroke();
+      });
+    }
+
+    arcPaths.forEach(function (rawPts, ai) {
+      for (var k = 0; k < rawPts.length - 1; k++) {
+        var r1 = rotate.apply(null, rawPts[k]), r2 = rotate.apply(null, rawPts[k + 1]);
+        if (r1[2] > 0 && r2[2] > 0) {
+          seg([r1[0] * R + cx, -r1[1] * R + cy], [r2[0] * R + cx, -r2[1] * R + cy], Math.min(0.5, ((r1[2] + r2[2]) / 2) * 0.65), arcCol, 1.0);
+        }
+      }
+      var pl = pulses[ai];
+      if (!reduceMotion) pl.t = (pl.t + pl.speed) % 1;
+      var idx = Math.floor(pl.t * (rawPts.length - 1));
+      var rp = rotate.apply(null, rawPts[idx]);
+      if (rp[2] > 0) {
+        var ppx = rp[0] * R + cx, ppy = -rp[1] * R + cy, bright = rp[2] * 0.95;
+        ctx.save(); ctx.shadowColor = 'rgba(' + nodeCol + ',0.9)'; ctx.shadowBlur = 16;
+        ctx.beginPath(); ctx.arc(ppx, ppy, 2.8, 0, Math.PI * 2); ctx.fillStyle = 'rgba(' + nodeFade + ',' + bright + ')'; ctx.fill();
+        ctx.beginPath(); ctx.arc(ppx, ppy, 1.2, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255,255,255,' + bright + ')'; ctx.fill();
+        ctx.restore();
+      }
+    });
+
+    nodes.forEach(function (n, ni) {
+      var r = rotate(n[0], n[1], n[2]);
+      if (r[2] < 0.05) return;
+      var px = r[0] * R + cx, py = -r[1] * R + cy;
+      var alpha = Math.min(1, r[2] * 1.1);
+      var pulse = 0.82 + 0.18 * Math.sin(angle * 2.5 + ni * 1.7);
+      ctx.save();
+      ctx.shadowColor = 'rgba(' + nodeCol + ',0.9)'; ctx.shadowBlur = 14;
+      ctx.beginPath(); ctx.arc(px, py, 3.8 * pulse, 0, Math.PI * 2); ctx.fillStyle = 'rgba(' + nodeCol + ',' + (alpha * 0.22) + ')'; ctx.fill();
+      ctx.beginPath(); ctx.arc(px, py, 2.0, 0, Math.PI * 2); ctx.fillStyle = 'rgba(' + nodeCol + ',' + alpha + ')'; ctx.fill();
+      ctx.beginPath(); ctx.arc(px, py, 0.9, 0, Math.PI * 2); ctx.fillStyle = 'rgba(' + nodeFade + ',' + alpha + ')'; ctx.fill();
+      ctx.restore();
+    });
+
+    if (isVisible && !reduceMotion) requestAnimationFrame(draw);
+  }
+
+  // 地球離開畫面時暫停動畫
+  new IntersectionObserver(function (entries) {
+    var was = isVisible;
+    isVisible = entries[0].isIntersecting;
+    if (isVisible && !was) draw();
+  }, { threshold: 0.05 }).observe(canvas);
+
+  draw();
+  if (reduceMotion) setTimeout(draw, 1500);
+})();
+</script>
+</body>
+</html>
